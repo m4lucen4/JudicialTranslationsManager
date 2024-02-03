@@ -48,9 +48,4 @@ export const filesColumns = [
     headerName: "Estado",
     width: 150,
   },
-  {
-    field: "img",
-    headerName: "Documento",
-    width: 150,
-  },
 ]

@@ -15,6 +15,7 @@ import {
   doc,
   serverTimestamp,
   getDoc,
+  setDoc,
 } from 'firebase/firestore'
 import { db, storage } from '../../firebase'
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'
@@ -299,11 +300,17 @@ const NewFile = ({ title }) => {
   const handleAdd = async (e) => {
     e.preventDefault()
     try {
-      await addDoc(collection(db, 'files'), {
+      const newData = {
         ...data,
         timeStamp: serverTimestamp(),
-      })
+      }
+      if (fileId) {
+        await setDoc(doc(db, 'files', fileId), newData)
+      } else {
+        await addDoc(collection(db, 'files'), newData)
+      }
       setIsModalOpen(true)
+      navigate(-1)
     } catch (err) {
       console.log(err)
     }
@@ -355,7 +362,6 @@ const NewFile = ({ title }) => {
                   e.preventDefault()
                   handleAdd(e)
                 }}
-                onCancel={() => navigate(-1)}
               />
             </form>
           </div>
