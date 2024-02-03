@@ -13,8 +13,6 @@ const MainForm = ({ data, setData, setFile }) => {
     setFile(e.target.files[0])
   }
 
-  console.log('DATOS:', data)
-
   return (
     <>
       <input
@@ -64,7 +62,7 @@ const MainForm = ({ data, setData, setFile }) => {
           value={data.state || ''}
         >
           <option value="" disabled>
-            Selecciona un tipo
+            Selecciona un estado
           </option>
           <option value="0">Pendiente</option>
           <option value="1">En curso</option>

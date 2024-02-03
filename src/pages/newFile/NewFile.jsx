@@ -56,8 +56,6 @@ const NewFile = ({ title }) => {
     fetchFileData()
   }, [fileId])
 
-  console.log('DATO', data)
-
   useEffect(() => {
     if (!loading && userData) {
       setData((prevData) => ({
