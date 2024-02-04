@@ -69,6 +69,14 @@ function App() {
                 }
               />
               <Route
+                path=":filter"
+                element={
+                  <RequireAuth>
+                    <FileList />
+                  </RequireAuth>
+                }
+              />
+              <Route
                 path="newFile/:fileId"
                 element={
                   <RequireAuth>

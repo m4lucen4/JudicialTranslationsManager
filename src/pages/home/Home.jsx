@@ -1,11 +1,12 @@
-import React from "react";
-import Sidebar from "../../components/sidebar/Sidebar";
-import Navbar from "../../components/navbar/Navbar";
-import "./home.scss";
-import Widget from "../../components/widget/Widget";
-import Featured from "../../components/featured/Featured";
-import Chart from "../../components/chart/Chart";
-import Table from "../../components/table/Table";
+import React from 'react'
+import Sidebar from '../../components/sidebar/Sidebar'
+import Navbar from '../../components/navbar/Navbar'
+import './home.scss'
+import Widget from '../../components/widget/Widget'
+import Featured from '../../components/featured/Featured'
+import Chart from '../../components/chart/Chart'
+import Table from '../../components/table/Table'
+import FileTable from '../fileList/components/FileTable'
 
 const Home = () => {
   return (
@@ -15,21 +16,20 @@ const Home = () => {
         <Navbar />
         <div className="widgets">
           <Widget type="user" />
-          {/* <Widget type="product" /> */}
-          <Widget type="file" />
-          {/* <Widget type="earning" /> */}
+          <Widget type="translations" />
+          <Widget type="interpretations" />
+          <Widget type="ratifications" />
         </div>
         <div className="charts">
-          <Featured />
+          <Chart title="Last 6 Months (Revenue)" aspect={2 / 1} />
           <Chart title="Last 6 Months (Revenue)" aspect={2 / 1} />
         </div>
         <div className="listContainer">
-          <div className="listTitle">Latest Transactions</div>
-          <Table />
+          <FileTable />
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

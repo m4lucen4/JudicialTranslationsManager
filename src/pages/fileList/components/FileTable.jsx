@@ -1,7 +1,7 @@
 import './filetable.scss'
 import { DataGrid } from '@mui/x-data-grid'
 import { filesColumns } from '../../../datatablesource'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { collection, onSnapshot } from 'firebase/firestore'
 import { db } from '../../../firebase'
@@ -22,6 +22,7 @@ const typeMap = {
 
 const FileTable = () => {
   const [data, setData] = useState([])
+  const { filter } = useParams()
 
   useEffect(() => {
     const unsub = onSnapshot(
@@ -36,7 +37,13 @@ const FileTable = () => {
             type: typeMap[data.type] || data.type,
           }
         })
-        setData(list)
+        if (filter) {
+          const filterValue = typeMap[filter]
+          const filteredList = list.filter((item) => item.type === filterValue)
+          setData(filteredList)
+        } else {
+          setData(list)
+        }
       },
       (error) => {
         console.log(error)
@@ -46,7 +53,7 @@ const FileTable = () => {
     return () => {
       unsub()
     }
-  }, [])
+  }, [filter])
 
   const actionColumn = [
     {
