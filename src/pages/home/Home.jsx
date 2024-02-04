@@ -3,9 +3,10 @@ import Sidebar from '../../components/sidebar/Sidebar'
 import Navbar from '../../components/navbar/Navbar'
 import './home.scss'
 import Widget from '../../components/widget/Widget'
-import Featured from '../../components/featured/Featured'
-import Chart from '../../components/chart/Chart'
-import Table from '../../components/table/Table'
+import ChartMixBar from '../../components/chart/ChartMixBar'
+import ChartBar from '../../components/chart/ChartBar'
+import ChartLine from '../../components/chart/ChartLine'
+import ChartPie from '../../components/chart/ChartPie'
 import FileTable from '../fileList/components/FileTable'
 
 const Home = () => {
@@ -21,8 +22,15 @@ const Home = () => {
           <Widget type="ratifications" />
         </div>
         <div className="charts">
-          <Chart title="Last 6 Months (Revenue)" aspect={2 / 1} />
-          <Chart title="Last 6 Months (Revenue)" aspect={2 / 1} />
+          <ChartLine title="Costes consumidos por órgano" aspect={2 / 1} />
+          <ChartBar
+            title="Relación de traducciones solicitadas/entregadas"
+            aspect={2 / 1}
+          />
+        </div>
+        <div className="charts">
+          <ChartPie title="Costes consumidos por órgano" aspect={2 / 1} />
+          <ChartMixBar title="Estado de los servicios" aspect={2 / 1} />
         </div>
         <div className="listContainer">
           <FileTable />
