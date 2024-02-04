@@ -369,6 +369,7 @@ const NewFile = ({ title }) => {
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
         onClose={() => navigate(-1)}
+        title="Registro añadido/actualizado correctamente"
       />
     </div>
   )

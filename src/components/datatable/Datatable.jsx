@@ -1,13 +1,16 @@
 import './datatable.scss'
 import { DataGrid } from '@mui/x-data-grid'
 import { userColumns } from '../../datatablesource'
+import ModalForm from '../../pages/newFile/components/modalForm'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { collection, deleteDoc, doc, onSnapshot } from 'firebase/firestore'
-import { db } from '../../firebase'
+import { collection, onSnapshot } from 'firebase/firestore'
+import { sendPasswordResetEmail } from 'firebase/auth'
+import { db, auth } from '../../firebase'
 
 const Datatable = () => {
   const [data, setData] = useState([])
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   useEffect(() => {
     const unsub = onSnapshot(
@@ -29,20 +32,20 @@ const Datatable = () => {
     }
   }, [])
 
-  // const handleDelete = async (id) => {
-  //   try {
-  //     await deleteDoc(doc(db, 'users', id))
-  //     setData(data.filter((item) => item.id !== id))
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  // }
+  const handleRecoveryPassword = async (email) => {
+    try {
+      await sendPasswordResetEmail(auth, email)
+      setIsModalOpen(true)
+    } catch (err) {
+      console.error('Error al enviar el correo de recuperación: ', err)
+    }
+  }
 
   const actionColumn = [
     {
       field: 'action',
       headerName: 'Acciones',
-      width: 200,
+      width: 250,
       renderCell: (params) => {
         return (
           <div className="cellAction">
@@ -52,12 +55,12 @@ const Datatable = () => {
             >
               <div className="viewButton">Editar</div>
             </Link>
-            {/* <div
+            <div
               className="deleteButton"
-              onClick={() => handleDelete(params.row.id)}
+              onClick={() => handleRecoveryPassword(params.row.email)}
             >
-              Eliminar
-            </div> */}
+              Enviar nueva contraseña
+            </div>
           </div>
         )
       },
@@ -78,6 +81,11 @@ const Datatable = () => {
         pageSize={9}
         rowsPerPageOptions={[9]}
         checkboxSelection
+      />
+      <ModalForm
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        title="Correo de recuperación enviado"
       />
     </div>
   )

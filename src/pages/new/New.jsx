@@ -122,6 +122,7 @@ const New = ({ inputs, title }) => {
                   placeholder="Juzgado de Primera Instancia e Ins...."
                   onChange={handleInput}
                   value={data?.displayName}
+                  disabled={!!userId}
                 />
               </div>
               <div className="formInput">
@@ -149,10 +150,12 @@ const New = ({ inputs, title }) => {
                   <option value="Usuario">Usuario</option>
                 </select>
               </div>
-              <div className="formInput">
-                <label>Contraseña</label>
-                <input id="password" type="password" onChange={handleInput} />
-              </div>
+              {!userId ? (
+                <div className="formInput">
+                  <label>Contraseña</label>
+                  <input id="password" type="password" onChange={handleInput} />
+                </div>
+              ) : null}
               <div className="formInput">
                 <label>Dirección</label>
                 <input
