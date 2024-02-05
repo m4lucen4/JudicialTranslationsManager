@@ -44,6 +44,17 @@ const MainForm = ({ data, setData, setFile }) => {
         />
       </div>
       <div className="formInput">
+        <label htmlFor="number">Número de procedimiento</label>
+        <input
+          id="number"
+          type="text"
+          placeholder="Número de procedimiento"
+          value={data.number || ''}
+          onChange={handleInput}
+          required
+        />
+      </div>
+      <div className="formInput">
         <label htmlFor="date">Fecha del procedimiento</label>
         <input
           id="date"
@@ -72,7 +83,7 @@ const MainForm = ({ data, setData, setFile }) => {
         </select>
       </div>
       <div className="formInput">
-        <label htmlFor="type">Tipo de procedimiento</label>
+        <label htmlFor="type">Tipo de servicio</label>
         <select
           id="type"
           onChange={handleInput}
