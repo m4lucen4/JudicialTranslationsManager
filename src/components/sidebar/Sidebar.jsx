@@ -13,7 +13,7 @@ import { useContext } from 'react'
 import { signOut } from 'firebase/auth'
 import { auth } from '../../firebase'
 
-const Sidebar = () => {
+const Sidebar = ({ userType }) => {
   const { dispatch } = useContext(DarkModeContext)
   const navigate = useNavigate()
 
@@ -43,12 +43,14 @@ const Sidebar = () => {
             </Link>
           </li>
           <p className="title">RECURSOS</p>
-          <Link to="/users" style={{ textDecoration: 'none' }}>
-            <li>
-              <PersonOutlineIcon className="icon" />
-              <span>Usuarios</span>
-            </li>
-          </Link>
+          {userType === 'SuperUsuario' && (
+            <Link to="/users" style={{ textDecoration: 'none' }}>
+              <li>
+                <PersonOutlineIcon className="icon" />
+                <span>Usuarios</span>
+              </li>
+            </Link>
+          )}
           <li>
             <InsertChartIcon className="icon" />
             <span>Estadísticas</span>

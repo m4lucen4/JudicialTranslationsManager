@@ -8,11 +8,13 @@ import ChartBar from '../../components/chart/ChartBar'
 import ChartLine from '../../components/chart/ChartLine'
 import ChartPie from '../../components/chart/ChartPie'
 import FileTable from '../fileList/components/FileTable'
+import useGetUser from '../../hooks/useGetUser'
 
 const Home = () => {
+  const { userData } = useGetUser()
   return (
     <div className="home">
-      <Sidebar />
+      <Sidebar userType={userData?.userType} />
       <div className="homeContainer">
         <Navbar />
         <div className="widgets">
