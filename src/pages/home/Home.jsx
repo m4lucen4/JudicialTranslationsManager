@@ -16,9 +16,9 @@ const Home = () => {
     <div className="home">
       <Sidebar userType={userData?.userType} />
       <div className="homeContainer">
-        <Navbar />
+        <Navbar userDisplay={userData?.displayName} />
         <div className="widgets">
-          <Widget type="user" />
+          {userData?.userType === 'SuperUsuario' && <Widget type="user" />}
           <Widget type="translations" />
           <Widget type="interpretations" />
           <Widget type="ratifications" />
