@@ -1,21 +1,26 @@
-import React from 'react';
-import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
+import React from 'react'
+import DriveFolderUploadOutlinedIcon from '@mui/icons-material/DriveFolderUploadOutlined'
 
-import "../newFile.scss"
+import '../newFile.scss'
 
-const FinalReviewerForm = ({ data, setData, setFinalTranslationFile, setReceiptFile }) => {
+const FinalReviewerForm = ({
+  data,
+  setData,
+  setFinalTranslationFile,
+  setReceiptFile,
+}) => {
   const handleInput = (e) => {
-    const { id, value } = e.target;
-    setData((prevData) => ({ ...prevData, [id]: value }));
-  };
+    const { id, value } = e.target
+    setData((prevData) => ({ ...prevData, [id]: value }))
+  }
 
   const handleFinalTranslationFileChange = (e) => {
-    setFinalTranslationFile(e.target.files[0]);
-  };
+    setFinalTranslationFile(e.target.files[0])
+  }
 
   const handleReceiptFileChange = (e) => {
-    setReceiptFile(e.target.files[0]);
-  };
+    setReceiptFile(e.target.files[0])
+  }
 
   return (
     <>
@@ -55,11 +60,16 @@ const FinalReviewerForm = ({ data, setData, setFinalTranslationFile, setReceiptF
           type="file"
           id="finalTranslationFile"
           onChange={handleFinalTranslationFileChange}
-          style={{ display: "none" }}
+          style={{ display: 'none' }}
         />
         {data.finalTranslationFileURL && (
           <div className="left">
-            <a href={data.finalTranslationFileURL} target="_blank" download="Traducción final" rel="noreferrer">
+            <a
+              href={data.finalTranslationFileURL}
+              target="_blank"
+              download="Traducción final"
+              rel="noreferrer"
+            >
               Descargar traducción final
             </a>
           </div>
@@ -73,11 +83,16 @@ const FinalReviewerForm = ({ data, setData, setFinalTranslationFile, setReceiptF
           type="file"
           id="receiptFile"
           onChange={handleReceiptFileChange}
-          style={{ display: "none" }}
+          style={{ display: 'none' }}
         />
         {data.receiptFileURL && (
           <div className="left">
-            <a href={data.receiptFileURL} target="_blank" download="Acuse de recibo" rel="noreferrer">
+            <a
+              href={data.receiptFileURL}
+              target="_blank"
+              download="Acuse de recibo"
+              rel="noreferrer"
+            >
               Descargar acuse de recibo
             </a>
           </div>
@@ -93,7 +108,7 @@ const FinalReviewerForm = ({ data, setData, setFinalTranslationFile, setReceiptF
         />
       </div>
     </>
-  );
-};
+  )
+}
 
-export default FinalReviewerForm;
+export default FinalReviewerForm

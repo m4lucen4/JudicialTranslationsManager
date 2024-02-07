@@ -1,6 +1,8 @@
 import React from 'react'
 import DriveFolderUploadOutlinedIcon from '@mui/icons-material/DriveFolderUploadOutlined'
 
+import languages from '../../../data/languages'
+
 import '../newFile.scss'
 
 const MainForm = ({ data, setData, setFile }) => {
@@ -111,6 +113,16 @@ const MainForm = ({ data, setData, setFile }) => {
           />
         </div>
       ) : null}
+      <div className="formInput">
+        <label htmlFor="phone">Teléfono</label>
+        <input
+          id="phone"
+          type="text"
+          placeholder="123 456 789"
+          value={data.phone || ''}
+          onChange={handleInput}
+        />
+      </div>
       {data.type === '1' || data.type === '2' ? (
         <div className="formInput">
           <label htmlFor="originlanguage">Idioma origen</label>
@@ -121,12 +133,13 @@ const MainForm = ({ data, setData, setFile }) => {
             value={data.originlanguage || ''}
           >
             <option value="" disabled>
-              Selecciona un tipo
+              Selecciona un idioma
             </option>
-            <option value="spanish">Español</option>
-            <option value="english">Inglés</option>
-            <option value="french">Frances</option>
-            <option value="german">Alemán</option>
+            {languages.map((lang) => (
+              <option key={lang.value} value={lang.value}>
+                {lang.label}
+              </option>
+            ))}
           </select>
         </div>
       ) : null}
@@ -142,25 +155,16 @@ const MainForm = ({ data, setData, setFile }) => {
             value={data.destinylanguage || ''}
           >
             <option value="" disabled>
-              Selecciona un tipo
+              Selecciona un idioma
             </option>
-            <option value="spanish">Español</option>
-            <option value="english">Inglés</option>
-            <option value="french">Frances</option>
-            <option value="german">Alemán</option>
+            {languages.map((lang) => (
+              <option key={lang.value} value={lang.value}>
+                {lang.label}
+              </option>
+            ))}
           </select>
         </div>
       ) : null}
-      <div className="formInput">
-        <label htmlFor="phone">Teléfono</label>
-        <input
-          id="phone"
-          type="text"
-          placeholder="123 456 789"
-          value={data.phone || ''}
-          onChange={handleInput}
-        />
-      </div>
       <div className="formInput">
         <label htmlFor="observations">Observaciones</label>
         <input
