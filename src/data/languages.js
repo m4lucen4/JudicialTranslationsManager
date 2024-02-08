@@ -1,4 +1,4 @@
-const languages = [
+export const languages = [
     { value: "albanian", label: "Albanés" },
     { value: "arabic", label: "Árabe" },
     { value: "german", label: "Alemán" },
@@ -15,6 +15,7 @@ const languages = [
     { value: "croatian", label: "Croata" },
     { value: "danish", label: "Danés" },
     { value: "slovak", label: "Eslovaco" },
+    { value: "spanish", label: "Español" },
     { value: "estonian", label: "Estonio" },
     { value: "farsi", label: "Farsi" },
     { value: "finnish", label: "Finés" },

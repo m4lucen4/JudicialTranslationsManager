@@ -1,10 +1,16 @@
 import './filetable.scss'
 import { DataGrid } from '@mui/x-data-grid'
-import { filesColumns } from '../../../datatablesource'
+import {
+  filesColumns,
+  filesTranslateColumns,
+  filesRatificationColumns,
+  filesInterpretationColumns,
+} from '../../../datatablesource'
 import { Link, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { collection, onSnapshot } from 'firebase/firestore'
 import { db } from '../../../firebase'
+import { languages } from '../../../data/languages'
 
 const stateMap = {
   0: 'Pendiente',
@@ -20,9 +26,22 @@ const typeMap = {
   2: 'Ratificación',
 }
 
+const columnsMap = {
+  undefined: filesColumns,
+  0: filesTranslateColumns,
+  1: filesInterpretationColumns,
+  2: filesRatificationColumns,
+}
+
 const FileTable = () => {
   const [data, setData] = useState([])
   const { filter } = useParams()
+  console.log('filter', filter)
+
+  const getLanguageLabel = (value) => {
+    const language = languages.find((language) => language.value === value)
+    return language ? language.label : value
+  }
 
   useEffect(() => {
     const unsub = onSnapshot(
@@ -35,6 +54,8 @@ const FileTable = () => {
             id: doc.id,
             state: stateMap[data.state] || data.state,
             type: typeMap[data.type] || data.type,
+            originlanguage: getLanguageLabel(data.originlanguage),
+            destinylanguage: getLanguageLabel(data.destinylanguage),
           }
         })
         if (filter) {
@@ -74,10 +95,18 @@ const FileTable = () => {
       },
     },
   ]
+
+  const currentColumns = columnsMap[filter]
+    ? columnsMap[filter].concat(actionColumn)
+    : filesColumns.concat(actionColumn)
+
+  const titleSuffix = filter !== undefined ? ` - ${typeMap[filter]}` : ''
+  const title = `Expedientes${titleSuffix}`
+
   return (
     <div className="datatable">
       <div className="datatableTitle">
-        Expedientes
+        {title}
         <Link to="/files/newFile" className="link">
           Añadir
         </Link>
@@ -85,7 +114,7 @@ const FileTable = () => {
       <DataGrid
         className="datagrid"
         rows={data}
-        columns={filesColumns.concat(actionColumn)}
+        columns={currentColumns}
         pageSize={9}
         rowsPerPageOptions={[9]}
         checkboxSelection
