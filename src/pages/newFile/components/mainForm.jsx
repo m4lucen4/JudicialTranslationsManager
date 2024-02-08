@@ -123,7 +123,7 @@ const MainForm = ({ data, setData, setFile }) => {
           onChange={handleInput}
         />
       </div>
-      {data.type === '1' || data.type === '2' ? (
+      {data.type === '0' ? (
         <div className="formInput">
           <label htmlFor="originlanguage">Idioma origen</label>
           <select
@@ -146,7 +146,7 @@ const MainForm = ({ data, setData, setFile }) => {
       {data.type === '0' || data.type === '1' || data.type === '2' ? (
         <div className="formInput">
           <label htmlFor="destinylanguage">
-            {data.type === '0' ? 'Idioma' : 'Idioma destino'}
+            {data.type === '0' ? 'Idioma destino' : 'Idioma'}
           </label>
           <select
             id="destinylanguage"
