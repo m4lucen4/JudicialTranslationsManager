@@ -19,12 +19,15 @@ const Home = () => {
         <Navbar userDisplay={userData?.displayName} />
         <div className="widgets">
           {userData?.userType === 'SuperUsuario' && <Widget type="user" />}
-          <Widget type="translations" />
-          <Widget type="interpretations" />
-          <Widget type="ratifications" />
+          <Widget type="translations" userData={userData} />
+          <Widget type="interpretations" userData={userData} />
+          <Widget type="ratifications" userData={userData} />
         </div>
         <div className="charts">
-          <ChartLine title="Costes consumidos por órgano" aspect={2 / 1} />
+          <ChartLine
+            title="Total de procedimientos por mes y año"
+            aspect={2 / 1}
+          />
           <ChartBar
             title="Relación de traducciones solicitadas/entregadas"
             aspect={2 / 1}

@@ -1,0 +1,33 @@
+.navbar {
+  height: 50px;
+  border-bottom: 0.5px solid #002664;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #555;
+}
+
+.wrapper {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.items {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%; 
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  position: relative;
+}
+
+.item:last-child {
+  margin-right: 0;
+}

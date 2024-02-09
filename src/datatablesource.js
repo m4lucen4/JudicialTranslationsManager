@@ -5,11 +5,15 @@ export const userColumns = [
     width: 300,
   },
   {
+    field: "county",
+    headerName: "Municipio",
+    width: 200,
+  },
+  {
     field: "email",
     headerName: "Email",
     width: 200,
   },
-
   {
     field: "phone",
     headerName: "Teléfono",

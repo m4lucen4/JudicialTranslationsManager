@@ -1,4 +1,3 @@
-import './sidebar.scss'
 import DashboardIcon from '@mui/icons-material/Dashboard'
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
 import InsertChartIcon from '@mui/icons-material/InsertChart'
@@ -12,6 +11,8 @@ import { DarkModeContext } from '../../context/darkModeContext'
 import { useContext } from 'react'
 import { signOut } from 'firebase/auth'
 import { auth } from '../../firebase'
+
+import './sidebar.css'
 
 const Sidebar = ({ userType }) => {
   const { dispatch } = useContext(DarkModeContext)
@@ -32,16 +33,15 @@ const Sidebar = ({ userType }) => {
           <img src="/logo.jpg" alt="Logo" className="logo" />
         </Link>
       </div>
-      <hr />
       <div className="center">
         <ul>
           <p className="title">PRINCIPAL</p>
-          <li>
-            <Link to="/" style={{ textDecoration: 'none' }}>
+          <Link to="/" style={{ textDecoration: 'none' }}>
+            <li>
               <DashboardIcon className="icon" />
               <span>Inicio</span>
-            </Link>
-          </li>
+            </li>
+          </Link>
           <p className="title">RECURSOS</p>
           {userType === 'SuperUsuario' && (
             <Link to="/users" style={{ textDecoration: 'none' }}>
@@ -87,16 +87,6 @@ const Sidebar = ({ userType }) => {
           </Link>
         </ul>
       </div>
-      {/* <div className="bottom">
-        <div
-          className="colorOption"
-          onClick={() => dispatch({ type: "LIGHT" })}
-        ></div>
-        <div
-          className="colorOption"
-          onClick={() => dispatch({ type: "DARK" })}
-        ></div>
-      </div> */}
     </div>
   )
 }

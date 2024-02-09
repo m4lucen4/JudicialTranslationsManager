@@ -1,4 +1,4 @@
-import './navbar.scss'
+import './navbar.css'
 
 const Navbar = ({ userDisplay }) => {
   return (
@@ -6,6 +6,9 @@ const Navbar = ({ userDisplay }) => {
       <div className="wrapper">
         <div className="items">
           <div className="item">USUARIO CONECTADO: {userDisplay}</div>
+          <div className="item">
+            Servicios de Interpretación y Traducción OOJJ Málaga
+          </div>
         </div>
       </div>
     </div>

@@ -36,7 +36,6 @@ const columnsMap = {
 const FileTable = () => {
   const [data, setData] = useState([])
   const { filter } = useParams()
-  console.log('filter', filter)
 
   const getLanguageLabel = (value) => {
     const language = languages.find((language) => language.value === value)

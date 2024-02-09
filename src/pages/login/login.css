@@ -1,0 +1,65 @@
+/* Estilos base */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f2f5;
+}
+
+.login-form {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 400px;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto 20px auto;
+  width: 200px;
+}
+
+input, button {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #002664;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.title {
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+span {
+  color: red;
+  text-align: center;
+  display: block;
+}
+
+/* Responsive */
+@media (min-width: 600px) {
+  .login-form {
+    padding: 40px;
+  }
+}
