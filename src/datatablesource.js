@@ -63,7 +63,7 @@ export const filesTranslateColumns = [
   {
     field: "state",
     headerName: "Estado",
-    width: 100,
+    width: 150,
   },
   {
     field: "createdAt",
@@ -102,7 +102,7 @@ export const filesInterpretationColumns= [
   {
     field: "state",
     headerName: "Estado",
-    width: 100,
+    width: 150,
   },
   {
     field: "createdAt",
@@ -140,7 +140,7 @@ export const filesRatificationColumns = [
   {
     field: "state",
     headerName: "Estado",
-    width: 100,
+    width: 150,
   },
   {
     field: "createdAt",

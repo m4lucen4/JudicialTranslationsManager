@@ -30,6 +30,7 @@ const dataByYear = {
     2024: [
       { name: 'Enero', Importe: 8500 },
       { name: 'Febrero', Importe: 9400 },
+      { name: 'Marzo', Importe: 6850 },
     ],
   };
   

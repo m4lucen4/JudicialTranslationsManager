@@ -25,6 +25,7 @@ const Chart = ({ aspect, title }) => {
     <div className="chart">
       <div className="title">{title}</div>
       <div className="year-selector">
+        <label>Selecciona el año: </label>
         <select value={year} onChange={(e) => setYear(e.target.value)}>
           <option value="2022">2022</option>
           <option value="2023">2023</option>

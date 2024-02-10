@@ -1,15 +1,18 @@
-import "./list.scss"
-import Sidebar from "../../components/sidebar/Sidebar"
-import Navbar from "../../components/navbar/Navbar"
-import FileTable from "./components/FileTable"
+import './list.scss'
+import Sidebar from '../../components/sidebar/Sidebar'
+import Navbar from '../../components/navbar/Navbar'
+import FileTable from './components/FileTable'
+
+import useGetUser from '../../hooks/useGetUser'
 
 const FileList = () => {
+  const { userData } = useGetUser()
   return (
     <div className="list">
-      <Sidebar/>
+      <Sidebar />
       <div className="listContainer">
-        <Navbar/>
-        <FileTable />
+        <Navbar userDisplay={userData?.displayName} />
+        <FileTable userData={userData} />
       </div>
     </div>
   )

@@ -42,6 +42,7 @@ const useGetUser = () => {
     })
 
     return () => unsubscribe()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return { userData, loading, error }
