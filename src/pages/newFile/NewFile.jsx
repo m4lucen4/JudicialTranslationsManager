@@ -7,7 +7,6 @@ import ModalForm from './components/modalForm'
 import MainForm from './components/mainForm'
 import TranslatorForm from './components/translatorForm'
 import InterpreterForm from './components/interpreterForm'
-import InitialReviewerForm from './components/initialReviewerForm'
 import ButtonContainer from './components/buttonContainer'
 import {
   addDoc,
@@ -28,7 +27,6 @@ const NewFile = ({ title }) => {
   const [file, setFile] = useState('')
   const [translationFile, setTranslationFile] = useState(null)
   const [certFile, setCertFile] = useState(null)
-  const [initialReviewerFile, setInitialReviewerFile] = useState(null)
   const [finalTranslationFile, setFinalTranslationFile] = useState(null)
   const [receiptFile, setReceiptFile] = useState(null)
   const [data, setData] = useState({})
@@ -57,13 +55,13 @@ const NewFile = ({ title }) => {
   }, [fileId])
 
   useEffect(() => {
-    if (!loading && userData) {
+    if (!fileId && !loading && userData) {
       setData((prevData) => ({
         ...prevData,
         oojjName: userData.displayName,
       }))
     }
-  }, [loading, userData])
+  }, [fileId, loading, userData])
 
   useEffect(() => {
     let now = new Date()
@@ -176,48 +174,6 @@ const NewFile = ({ title }) => {
   }, [translationFile])
 
   useEffect(() => {
-    if (initialReviewerFile) {
-      const uploadInitialReviewerFile = () => {
-        const initialReviewerFileName = `initialReviewer_${new Date().getTime()}_${
-          initialReviewerFile.name
-        }`
-        const storageRef = ref(
-          storage,
-          `initialReviewerFiles/${initialReviewerFileName}`
-        )
-        const uploadTask = uploadBytesResumable(storageRef, initialReviewerFile)
-
-        uploadTask.on(
-          'state_changed',
-          (snapshot) => {
-            const progress =
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-            console.log(
-              'Archivo del revisor inicial está siendo cargado',
-              progress,
-              '% done'
-            )
-          },
-          (error) => {
-            console.log(error)
-          },
-          () => {
-            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-              console.log('URL del archivo del revisor inicial:', downloadURL)
-              setData((prev) => ({
-                ...prev,
-                initialReviewerFileURL: downloadURL,
-              }))
-            })
-          }
-        )
-      }
-
-      uploadInitialReviewerFile()
-    }
-  }, [initialReviewerFile])
-
-  useEffect(() => {
     if (finalTranslationFile) {
       const uploadFinalTranslationFile = () => {
         const finalTranslationFileName = `finalTranslation_${new Date().getTime()}_${
@@ -298,15 +254,22 @@ const NewFile = ({ title }) => {
   const handleAdd = async (e) => {
     e.preventDefault()
     try {
-      const userUID = userData?.uid
-      if (!userUID) {
-        console.error('No se encontró el UID del usuario')
-        return
-      }
-      const newData = {
+      let newData = {
         ...data,
         timeStamp: serverTimestamp(),
-        userUID: userUID,
+      }
+      if (!fileId) {
+        const userUID = userData?.uid
+        const userDisplayName = userData?.displayName
+        if (!userUID || !userDisplayName) {
+          console.error('No se encontró el UID o displayName del usuario')
+          return
+        }
+        newData = {
+          ...newData,
+          userUID: userUID,
+          userDisplayName: userDisplayName,
+        }
       }
       if (fileId) {
         await setDoc(doc(db, 'files', fileId), newData)
@@ -347,11 +310,6 @@ const NewFile = ({ title }) => {
                     setData={setData}
                     setTranslationFile={setTranslationFile}
                   />
-                  {/* <InitialReviewerForm
-                    data={data}
-                    setData={setData}
-                    setInitialReviewerFile={setInitialReviewerFile}
-                  /> */}
                   <FinalReviewerForm
                     data={data}
                     setData={setData}
