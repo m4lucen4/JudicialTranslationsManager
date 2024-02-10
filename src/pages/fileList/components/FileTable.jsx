@@ -68,6 +68,11 @@ const FileTable = ({ userData }) => {
     return <div>Error al cargar los datos</div>
   }
 
+  const filteredData =
+    userData?.userType === 'Usuario'
+      ? data.filter((file) => file.userUID === userData.uid)
+      : data
+
   return (
     <div className="datatable">
       <div className="datatableTitle">
@@ -80,7 +85,7 @@ const FileTable = ({ userData }) => {
       </div>
       <DataGrid
         className="datagrid"
-        rows={data}
+        rows={filteredData}
         columns={currentColumns}
         pageSize={9}
         rowsPerPageOptions={[9]}

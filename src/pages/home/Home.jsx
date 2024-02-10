@@ -38,7 +38,7 @@ const Home = () => {
           <ChartMixBar title="Estado de los servicios" aspect={2 / 1} />
         </div>
         <div className="listContainer">
-          <FileTable />
+          <FileTable userData={userData} />
         </div>
       </div>
     </div>

@@ -48,7 +48,7 @@ const NewFile = ({ title }) => {
         if (fileSnap.exists()) {
           setData(fileSnap.data())
         } else {
-          console.log('No se encontró el documento cabesa!')
+          console.log('No se encontró el documento')
         }
       }
     }
@@ -298,9 +298,15 @@ const NewFile = ({ title }) => {
   const handleAdd = async (e) => {
     e.preventDefault()
     try {
+      const userUID = userData?.uid
+      if (!userUID) {
+        console.error('No se encontró el UID del usuario')
+        return
+      }
       const newData = {
         ...data,
         timeStamp: serverTimestamp(),
+        userUID: userUID,
       }
       if (fileId) {
         await setDoc(doc(db, 'files', fileId), newData)
@@ -341,11 +347,11 @@ const NewFile = ({ title }) => {
                     setData={setData}
                     setTranslationFile={setTranslationFile}
                   />
-                  <InitialReviewerForm
+                  {/* <InitialReviewerForm
                     data={data}
                     setData={setData}
                     setInitialReviewerFile={setInitialReviewerFile}
-                  />
+                  /> */}
                   <FinalReviewerForm
                     data={data}
                     setData={setData}
