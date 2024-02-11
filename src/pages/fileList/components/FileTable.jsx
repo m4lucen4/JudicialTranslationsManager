@@ -108,6 +108,11 @@ const FileTable = ({ userData }) => {
       </div>
       <DataGrid
         className="datagrid"
+        initialState={{
+          sorting: {
+            sortModel: [{ field: 'createdAt', sort: 'desc' }],
+          },
+        }}
         rows={filteredData}
         columns={currentColumns}
         pageSize={9}
