@@ -26,7 +26,7 @@ const FinalReviewerForm = ({
     <>
       <h1>Información Revisión</h1>
       <div className="formInput">
-        <label htmlFor="finalReviewer">Revisor final</label>
+        <label htmlFor="finalReviewer">Revisor</label>
         <input
           id="finalReviewer"
           type="text"

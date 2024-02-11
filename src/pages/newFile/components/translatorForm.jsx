@@ -1,34 +1,34 @@
 import React from 'react'
 import DriveFolderUploadOutlinedIcon from '@mui/icons-material/DriveFolderUploadOutlined'
 
-const TranslatorForm = ({ data, setData, setTranslationFile }) => {
+const TranslatorForm = ({ data, setData }) => {
   const handleInput = (e) => {
     const { id, value } = e.target
     setData((prevData) => ({ ...prevData, [id]: value }))
   }
 
-  const handleTranslationFileChange = (e) => {
-    setTranslationFile(e.target.files[0])
-  }
+  // const handleTranslationFileChange = (e) => {
+  //   setTranslationFile(e.target.files[0])
+  // }
 
   return (
     <>
       <h1>Información Traductor</h1>
-      <div className="formInput">
-        <label htmlFor="deliveryDate">Fecha de entrega</label>
-        <input
-          id="deliveryDate"
-          type="date"
-          value={data.deliveryDate || ''}
-          onChange={handleInput}
-        />
-      </div>
       <div className="formInput">
         <label htmlFor="worker">Traductor</label>
         <input
           id="worker"
           type="text"
           value={data.worker || ''}
+          onChange={handleInput}
+        />
+      </div>
+      <div className="formInput">
+        <label htmlFor="deliveryDate">Fecha de entrega</label>
+        <input
+          id="deliveryDate"
+          type="date"
+          value={data.deliveryDate || ''}
           onChange={handleInput}
         />
       </div>
@@ -50,7 +50,7 @@ const TranslatorForm = ({ data, setData, setTranslationFile }) => {
           onChange={handleInput}
         />
       </div>
-      <div className="formInput">
+      {/* <div className="formInput">
         <label htmlFor="regimen">Régimen</label>
         <select id="regimen" value={data.regimen || ''} onChange={handleInput}>
           <option value="" disabled>
@@ -59,8 +59,8 @@ const TranslatorForm = ({ data, setData, setTranslationFile }) => {
           <option value="autonomo">Autónomo</option>
           <option value="cuentaAjena">Cuenta ajena</option>
         </select>
-      </div>
-      <div className="formInput">
+      </div> */}
+      {/* <div className="formInput">
         <label htmlFor="translation">
           Traducción: <DriveFolderUploadOutlinedIcon className="icon" />
         </label>
@@ -82,7 +82,7 @@ const TranslatorForm = ({ data, setData, setTranslationFile }) => {
             </a>
           </div>
         )}
-      </div>
+      </div> */}
     </>
   )
 }

@@ -1,4 +1,6 @@
 import { DataGrid } from '@mui/x-data-grid'
+import Modal from '@mui/material/Modal'
+import Box from '@mui/material/Box'
 import {
   filesColumns,
   filesTranslateColumns,
@@ -7,8 +9,21 @@ import {
 } from '../../../datatablesource'
 import { Link, useParams } from 'react-router-dom'
 import useGetFiles from '../../../hooks/useGetFiles'
+import { useState } from 'react'
 
 import './filetable.scss'
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+}
 
 const typeMap = {
   0: 'Traducción',
@@ -25,7 +40,14 @@ const columnsMap = {
 
 const FileTable = ({ userData }) => {
   const { filter } = useParams()
+  const [selectedFileData, setSelectedFileData] = useState(null)
   const { data, loading, error } = useGetFiles(filter)
+  const [open, setOpen] = useState(false)
+  const handleOpen = (fileData) => {
+    setSelectedFileData(fileData)
+    setOpen(true)
+  }
+  const handleClose = () => setOpen(false)
 
   const actionColumn = [
     {
@@ -35,12 +57,13 @@ const FileTable = ({ userData }) => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link
-              to={`/files/newFile/${params.row.id}`}
-              style={{ textDecoration: 'none' }}
+            <div
+              onClick={() => handleOpen(params.row)}
+              className="viewButton"
+              style={{ cursor: 'pointer', textDecoration: 'none' }}
             >
-              <div className="viewButton">Ver detalles</div>
-            </Link>
+              Ver detalles
+            </div>
             <Link
               to={`/files/newFile/${params.row.id}`}
               style={{ textDecoration: 'none' }}
@@ -91,6 +114,38 @@ const FileTable = ({ userData }) => {
         rowsPerPageOptions={[9]}
         checkboxSelection
       />
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          {selectedFileData ? (
+            <>
+              <h2 id="modal-modal-title">
+                Detalles del Expediente - {selectedFileData.type}
+              </h2>
+              <hr />
+              <br />
+              <p>Nombre: {selectedFileData.oojjName}</p>
+              <p>Fecha de registro: {selectedFileData.createdAt}</p>
+              <p>Estado: {selectedFileData.state}</p>
+              <p>
+                Descripción: {selectedFileData.description} -{' '}
+                {selectedFileData.number}
+              </p>
+              <p>Traductor/Interprete: {selectedFileData.worker}</p>
+              {selectedFileData.type === 'Traducción' && (
+                <p>Idioma documento: {selectedFileData.originlanguage}</p>
+              )}
+              <p>Idioma: {selectedFileData.destinylanguage}</p>
+            </>
+          ) : (
+            <p>Cargando datos...</p>
+          )}
+        </Box>
+      </Modal>
     </div>
   )
 }
