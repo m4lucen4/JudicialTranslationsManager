@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import DriveFolderUploadOutlinedIcon from '@mui/icons-material/DriveFolderUploadOutlined'
 
 import languages from '../../../data/languages'
 
 import '../newFile.scss'
 
-const MainForm = ({ data, setData, setFile }) => {
+const MainForm = ({ data, setData, setFile, userData, fileId }) => {
   const handleInput = (e) => {
     const { id, value } = e.target
     setData((prevData) => ({ ...prevData, [id]: value }))
@@ -14,6 +14,22 @@ const MainForm = ({ data, setData, setFile }) => {
   const handleFileChange = (e) => {
     setFile(e.target.files[0])
   }
+
+  const handleCheckboxChange = (e) => {
+    setData((prevData) => ({
+      ...prevData,
+      state: e.target.checked ? '3' : '0',
+    }))
+  }
+
+  useEffect(() => {
+    if (!fileId) {
+      setData((prevData) => ({
+        ...prevData,
+        state: '0',
+      }))
+    }
+  }, [fileId, setData])
 
   return (
     <>
@@ -66,24 +82,31 @@ const MainForm = ({ data, setData, setFile }) => {
           required
         />
       </div>
-      <div className="formInput">
-        <label htmlFor="state">Estado</label>
-        <select
-          id="state"
-          onChange={handleInput}
-          defaultValue=""
-          value={data.state || ''}
-        >
-          <option value="" disabled>
-            Selecciona un estado
-          </option>
-          <option value="0">Pendiente</option>
-          <option value="1">En curso</option>
-          <option value="2">Pendiente de facturar</option>
-          <option value="3">Suspendido</option>
-          <option value="4">Facturado</option>
-        </select>
-      </div>
+      {fileId && userData?.userType === 'SuperUsuario' && (
+        <div className="formInput">
+          <label htmlFor="state">Estado</label>
+          <select id="state" onChange={handleInput} value={data.state || ''}>
+            <option value="" disabled>
+              Selecciona un estado
+            </option>
+            <option value="0">Pendiente</option>
+            <option value="1">En curso</option>
+            <option value="2">Pendiente de facturar</option>
+            <option value="3">Suspendido</option>
+            <option value="4">Facturado</option>
+          </select>
+        </div>
+      )}
+      {userData?.userType === 'Usuario' && (
+        <div className="formInput">
+          <label>Suspender expediente</label>
+          <input
+            type="checkbox"
+            onChange={handleCheckboxChange}
+            checked={data.state === '3'}
+          />
+        </div>
+      )}
       <div className="formInput">
         <label htmlFor="type">Tipo de servicio</label>
         <select

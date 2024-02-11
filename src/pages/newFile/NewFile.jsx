@@ -294,11 +294,18 @@ const NewFile = ({ title }) => {
         <div className="bottom">
           <div className="right">
             <form onSubmit={handleAdd}>
-              <MainForm data={data} setData={setData} setFile={setFile} />
+              <MainForm
+                data={data}
+                setData={setData}
+                setFile={setFile}
+                userData={userData}
+                fileId={fileId}
+              />
               {(data.type === '1' || data.type === '2') &&
                 data.state !== '0' && (
                   <InterpreterForm
                     data={data}
+                    userData={userData}
                     setData={setData}
                     setCertFile={setCertFile}
                   />
@@ -307,11 +314,13 @@ const NewFile = ({ title }) => {
                 <>
                   <TranslatorForm
                     data={data}
+                    userData={userData}
                     setData={setData}
                     //setTranslationFile={setTranslationFile}
                   />
                   <FinalReviewerForm
                     data={data}
+                    userData={userData}
                     setData={setData}
                     setFinalTranslationFile={setFinalTranslationFile}
                     setReceiptFile={setReceiptFile}

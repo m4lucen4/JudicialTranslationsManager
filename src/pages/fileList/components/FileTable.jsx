@@ -117,7 +117,6 @@ const FileTable = ({ userData }) => {
         columns={currentColumns}
         pageSize={9}
         rowsPerPageOptions={[9]}
-        checkboxSelection
       />
       <Modal
         open={open}

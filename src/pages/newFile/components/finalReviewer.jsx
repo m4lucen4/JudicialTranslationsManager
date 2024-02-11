@@ -5,6 +5,7 @@ import '../newFile.scss'
 
 const FinalReviewerForm = ({
   data,
+  userData,
   setData,
   setFinalTranslationFile,
   setReceiptFile,
@@ -22,6 +23,8 @@ const FinalReviewerForm = ({
     setReceiptFile(e.target.files[0])
   }
 
+  const isDisabled = userData?.userType === 'Usuario'
+
   return (
     <>
       <h1>Información Revisión</h1>
@@ -32,6 +35,7 @@ const FinalReviewerForm = ({
           type="text"
           value={data.finalReviewer || ''}
           onChange={handleInput}
+          disabled={isDisabled}
         />
       </div>
       <div className="formInput">
@@ -41,6 +45,7 @@ const FinalReviewerForm = ({
           type="date"
           value={data.reviewerDate || ''}
           onChange={handleInput}
+          disabled={isDisabled}
         />
       </div>
       <div className="formInput">
@@ -50,6 +55,7 @@ const FinalReviewerForm = ({
           type="date"
           value={data.finalDate || ''}
           onChange={handleInput}
+          disabled={isDisabled}
         />
       </div>
       <div className="formInput">
@@ -61,6 +67,7 @@ const FinalReviewerForm = ({
           id="finalTranslationFile"
           onChange={handleFinalTranslationFileChange}
           style={{ display: 'none' }}
+          disabled={isDisabled}
         />
         {data.finalTranslationFileURL && (
           <div className="left">
@@ -105,6 +112,7 @@ const FinalReviewerForm = ({
           type="number"
           value={data.totalPages || ''}
           onChange={handleInput}
+          disabled={isDisabled}
         />
       </div>
     </>

@@ -1,7 +1,7 @@
 import React from 'react'
 import DriveFolderUploadOutlinedIcon from '@mui/icons-material/DriveFolderUploadOutlined'
 
-const TranslatorForm = ({ data, setData }) => {
+const TranslatorForm = ({ data, setData, userData }) => {
   const handleInput = (e) => {
     const { id, value } = e.target
     setData((prevData) => ({ ...prevData, [id]: value }))
@@ -10,6 +10,7 @@ const TranslatorForm = ({ data, setData }) => {
   // const handleTranslationFileChange = (e) => {
   //   setTranslationFile(e.target.files[0])
   // }
+  const isDisabled = userData?.userType === 'Usuario'
 
   return (
     <>
@@ -21,6 +22,7 @@ const TranslatorForm = ({ data, setData }) => {
           type="text"
           value={data.worker || ''}
           onChange={handleInput}
+          disabled={isDisabled}
         />
       </div>
       <div className="formInput">
@@ -30,6 +32,7 @@ const TranslatorForm = ({ data, setData }) => {
           type="date"
           value={data.deliveryDate || ''}
           onChange={handleInput}
+          disabled={isDisabled}
         />
       </div>
       <div className="formInput">
@@ -39,6 +42,7 @@ const TranslatorForm = ({ data, setData }) => {
           type="number"
           value={data.rate || ''}
           onChange={handleInput}
+          disabled={isDisabled}
         />
       </div>
       <div className="formInput">
@@ -48,6 +52,7 @@ const TranslatorForm = ({ data, setData }) => {
           type="number"
           value={data.wordCount || ''}
           onChange={handleInput}
+          disabled={isDisabled}
         />
       </div>
       {/* <div className="formInput">

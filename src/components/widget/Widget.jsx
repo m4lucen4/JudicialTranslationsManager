@@ -57,6 +57,10 @@ const Widget = ({ type, userData }) => {
         queryRef = query(queryRef, where('type', '==', data.filter.toString()))
       }
 
+      if (userData?.uid && userData?.userType === 'Usuario') {
+        queryRef = query(queryRef, where('userUID', '==', userData.uid))
+      }
+
       const querySnapshot = await getDocs(queryRef)
 
       setSubTotal(querySnapshot.docs.length)

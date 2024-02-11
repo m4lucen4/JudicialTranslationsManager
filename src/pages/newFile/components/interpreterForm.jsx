@@ -1,7 +1,7 @@
 import React from 'react'
 import DriveFolderUploadOutlinedIcon from '@mui/icons-material/DriveFolderUploadOutlined'
 
-const InterpreterForm = ({ data, setData, setCertFile }) => {
+const InterpreterForm = ({ data, setData, setCertFile, userData }) => {
   const handleInput = (e) => {
     const { id, value } = e.target
     setData((prevData) => ({ ...prevData, [id]: value }))
@@ -10,6 +10,8 @@ const InterpreterForm = ({ data, setData, setCertFile }) => {
   const handleCertFileChange = (e) => {
     setCertFile(e.target.files[0])
   }
+
+  const isDisabled = userData?.userType === 'Usuario'
 
   return (
     <>
@@ -21,6 +23,7 @@ const InterpreterForm = ({ data, setData, setCertFile }) => {
           type="text"
           value={data.worker || ''}
           onChange={handleInput}
+          disabled={isDisabled}
         />
       </div>
       <div className="formInput">
@@ -30,6 +33,7 @@ const InterpreterForm = ({ data, setData, setCertFile }) => {
           type="number"
           value={data.rate || ''}
           onChange={handleInput}
+          disabled={isDisabled}
         />
       </div>
       <div className="formInput">
@@ -39,6 +43,7 @@ const InterpreterForm = ({ data, setData, setCertFile }) => {
           type="number"
           value={data.time || ''}
           onChange={handleInput}
+          disabled={isDisabled}
         />
       </div>
       <div className="formInput">
@@ -50,6 +55,7 @@ const InterpreterForm = ({ data, setData, setCertFile }) => {
           id="certificate"
           onChange={handleCertFileChange}
           style={{ display: 'none' }}
+          disabled={isDisabled}
         />
         {data.certURL && (
           <div className="left">
