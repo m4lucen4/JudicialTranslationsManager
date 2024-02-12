@@ -287,7 +287,7 @@ const NewFile = ({ title }) => {
     <div className="new">
       <Sidebar />
       <div className="newContainer">
-        <Navbar userDisplay={userData?.displayName} />
+        <Navbar userData={userData} />
         <div className="top">
           <h1>{title}</h1>
         </div>

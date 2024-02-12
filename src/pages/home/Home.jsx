@@ -11,12 +11,13 @@ import FileTable from '../fileList/components/FileTable'
 import useGetUser from '../../hooks/useGetUser'
 
 const Home = () => {
-  const { userData } = useGetUser()
+  const { userData, loading } = useGetUser()
+
   return (
     <div className="home">
       <Sidebar userType={userData?.userType} />
       <div className="homeContainer">
-        <Navbar userDisplay={userData?.displayName} />
+        <Navbar userData={userData} />
         <div className="widgets">
           {userData?.userType === 'SuperUsuario' && <Widget type="user" />}
           <Widget type="translations" userData={userData} />

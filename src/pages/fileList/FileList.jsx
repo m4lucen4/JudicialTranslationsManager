@@ -11,7 +11,7 @@ const FileList = () => {
     <div className="list">
       <Sidebar />
       <div className="listContainer">
-        <Navbar userDisplay={userData?.displayName} />
+        <Navbar userData={userData} />
         <FileTable userData={userData} />
       </div>
     </div>

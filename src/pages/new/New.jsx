@@ -7,6 +7,7 @@ import { auth, db, storage } from '../../firebase'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'
 import { Link, useNavigate, useParams } from 'react-router-dom'
+import useGetUser from '../../hooks/useGetUser'
 
 const New = ({ inputs, title }) => {
   const [file, setFile] = useState('')
@@ -14,6 +15,7 @@ const New = ({ inputs, title }) => {
   const [per, setPerc] = useState(null)
   const { userId } = useParams()
   const navigate = useNavigate()
+  const { userData, loading, error } = useGetUser()
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -107,7 +109,7 @@ const New = ({ inputs, title }) => {
     <div className="new">
       <Sidebar />
       <div className="newContainer">
-        <Navbar />
+        <Navbar userData={userData} />
         <div className="top">
           <h1>{title}</h1>
         </div>
