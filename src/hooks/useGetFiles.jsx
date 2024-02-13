@@ -3,6 +3,8 @@ import { collection, onSnapshot } from 'firebase/firestore'
 import { db } from '../firebase'
 import { languages } from '../data/languages'
 
+import { format } from 'date-fns'
+
 const stateMap = {
   0: 'Pendiente',
   1: 'En curso',
@@ -34,6 +36,10 @@ const useGetFiles = (filter) => {
       (snapShot) => {
         let list = snapShot.docs.map((doc) => {
           const data = doc.data()
+          console.log('Los datos son: ', data)
+          const createdAtFormatted = data.createdAt
+            ? format(new Date(data.createdAt), 'dd/MM/yyyy HH:mm')
+            : 'Fecha no disponible'
           return {
             ...data,
             id: doc.id,
@@ -41,6 +47,7 @@ const useGetFiles = (filter) => {
             type: typeMap[data.type] || data.type,
             originlanguage: getLanguageLabel(data.originlanguage),
             destinylanguage: getLanguageLabel(data.destinylanguage),
+            createdAt: createdAtFormatted,
           }
         })
         if (filter) {

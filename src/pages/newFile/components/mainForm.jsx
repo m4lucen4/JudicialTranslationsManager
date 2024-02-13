@@ -200,7 +200,11 @@ const MainForm = ({ data, setData, setFile, userData, fileId }) => {
       </div>
       <div className="formInput">
         <label htmlFor="attachment">
-          Documento: <DriveFolderUploadOutlinedIcon className="icon" />
+          Documento: <DriveFolderUploadOutlinedIcon className="icon" />{' '}
+          <span>
+            Si desea subir varios archivos, debe unirlos en un único archivo
+            comprimido
+          </span>
         </label>
         <input
           type="file"
