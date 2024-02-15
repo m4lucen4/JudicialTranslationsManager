@@ -26,7 +26,7 @@ const InterpreterForm = ({ data, setData, setCertFile, userData }) => {
           disabled={isDisabled}
         />
       </div>
-      <div className="formInput">
+      {/* <div className="formInput">
         <label htmlFor="rate">Tarifa</label>
         <input
           id="rate"
@@ -35,7 +35,7 @@ const InterpreterForm = ({ data, setData, setCertFile, userData }) => {
           onChange={handleInput}
           disabled={isDisabled}
         />
-      </div>
+      </div> */}
       <div className="formInput">
         <label htmlFor="time">Tiempo (en horas)</label>
         <input

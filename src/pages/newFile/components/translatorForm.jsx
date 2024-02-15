@@ -35,7 +35,7 @@ const TranslatorForm = ({ data, setData, userData }) => {
           disabled={isDisabled}
         />
       </div>
-      <div className="formInput">
+      {/* <div className="formInput">
         <label htmlFor="rate">Tarifa</label>
         <input
           id="rate"
@@ -44,8 +44,8 @@ const TranslatorForm = ({ data, setData, userData }) => {
           onChange={handleInput}
           disabled={isDisabled}
         />
-      </div>
-      <div className="formInput">
+      </div> */}
+      {/* <div className="formInput">
         <label htmlFor="wordCount">Número de palabras</label>
         <input
           id="wordCount"
@@ -54,7 +54,7 @@ const TranslatorForm = ({ data, setData, userData }) => {
           onChange={handleInput}
           disabled={isDisabled}
         />
-      </div>
+      </div> */}
       {/* <div className="formInput">
         <label htmlFor="regimen">Régimen</label>
         <select id="regimen" value={data.regimen || ''} onChange={handleInput}>

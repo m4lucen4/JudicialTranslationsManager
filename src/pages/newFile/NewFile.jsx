@@ -25,7 +25,6 @@ import FinalReviewerForm from './components/finalReviewer'
 
 const NewFile = ({ title }) => {
   const [file, setFile] = useState('')
-  //const [translationFile, setTranslationFile] = useState(null)
   const [certFile, setCertFile] = useState(null)
   const [finalTranslationFile, setFinalTranslationFile] = useState(null)
   const [receiptFile, setReceiptFile] = useState(null)
@@ -140,38 +139,6 @@ const NewFile = ({ title }) => {
       uploadCert()
     }
   }, [certFile])
-
-  // useEffect(() => {
-  //   if (translationFile) {
-  //     const uploadTranslation = () => {
-  //       const translationName = `translation_${new Date().getTime()}_${
-  //         translationFile.name
-  //       }`
-  //       const storageRef = ref(storage, `translations/${translationName}`)
-  //       const uploadTask = uploadBytesResumable(storageRef, translationFile)
-
-  //       uploadTask.on(
-  //         'state_changed',
-  //         (snapshot) => {
-  //           const progress =
-  //             (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-  //           console.log('Traducción está siendo cargada ', progress, '% done')
-  //         },
-  //         (error) => {
-  //           console.log(error)
-  //         },
-  //         () => {
-  //           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-  //             console.log('URL de la traducción:', downloadURL)
-  //             setData((prev) => ({ ...prev, translationURL: downloadURL }))
-  //           })
-  //         }
-  //       )
-  //     }
-
-  //     uploadTranslation()
-  //   }
-  // }, [translationFile])
 
   useEffect(() => {
     if (finalTranslationFile) {
@@ -316,7 +283,6 @@ const NewFile = ({ title }) => {
                     data={data}
                     userData={userData}
                     setData={setData}
-                    //setTranslationFile={setTranslationFile}
                   />
                   <FinalReviewerForm
                     data={data}

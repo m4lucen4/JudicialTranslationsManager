@@ -141,7 +141,11 @@ const FileTable = ({ userData }) => {
               </p>
               <p>Traductor/Interprete: {selectedFileData.worker}</p>
               {selectedFileData.type === 'Traducción' && (
-                <p>Idioma documento: {selectedFileData.originlanguage}</p>
+                <>
+                  <p>Idioma documento: {selectedFileData.originlanguage}</p>
+                  <p>Fecha de entrega: {selectedFileData.deliveryDate}</p>
+                  <p>Número de páginas: {selectedFileData.totalPages}</p>
+                </>
               )}
               <p>Idioma: {selectedFileData.destinylanguage}</p>
             </>

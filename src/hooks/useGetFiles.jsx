@@ -36,9 +36,14 @@ const useGetFiles = (filter) => {
       (snapShot) => {
         let list = snapShot.docs.map((doc) => {
           const data = doc.data()
-          console.log('Los datos son: ', data)
           const createdAtFormatted = data.createdAt
             ? format(new Date(data.createdAt), 'dd/MM/yyyy HH:mm')
+            : 'Fecha no disponible'
+          const dateFormatted = data.date
+            ? format(new Date(data.date), 'dd/MM/yyyy HH:mm')
+            : 'Fecha no disponible'
+          const deliveryDateFormatted = data.deliveryDate
+            ? format(new Date(data.deliveryDate), 'dd/MM/yyyy')
             : 'Fecha no disponible'
           return {
             ...data,
@@ -48,6 +53,8 @@ const useGetFiles = (filter) => {
             originlanguage: getLanguageLabel(data.originlanguage),
             destinylanguage: getLanguageLabel(data.destinylanguage),
             createdAt: createdAtFormatted,
+            date: dateFormatted,
+            deliveryDate: deliveryDateFormatted,
           }
         })
         if (filter) {
